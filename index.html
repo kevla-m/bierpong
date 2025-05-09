@@ -4,60 +4,94 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bierpong Strafen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #111;
+      margin: 0;
+      padding: 0;
+      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(135deg, #1f1f1f, #2c3e50);
       color: #fff;
-      text-align: center;
-      padding: 2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 2rem;
     }
-    h1, h2 {
-      margin-bottom: 1em;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #f1c40f;
     }
+
+    h2 {
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
     .btn {
       display: inline-block;
-      margin: 1em;
-      padding: 1em 2em;
+      margin: 0.5rem;
+      padding: 1rem 2rem;
       border: none;
-      border-radius: 10px;
-      font-size: 1.2em;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
+      transition: transform 0.2s ease, opacity 0.3s;
     }
-    .zufall { background-color: #f39c12; }
-    .selbst { background-color: #2980b9; }
-    .hot { background-color: #e74c3c; }
-    .ultimative { background-color: #8e44ad; }
-    .npc { background-color: #3498db; }
-    .tranquile { background-color: #2ecc71; }
-    .btn:hover { opacity: 0.85; }
-    #strafenBox {
-      margin-top: 2em;
-      font-size: 1.5em;
-      padding: 1em;
-      background: #222;
-      border-radius: 10px;
-      min-height: 80px;
+
+    .btn:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
     }
+
+    .zufall { background: #f39c12; color: #000; }
+    .selbst { background: #2980b9; color: #fff; }
+    .hot { background: #e74c3c; }
+    .ultimative { background: #8e44ad; }
+    .npc { background: #3498db; }
+    .tranquile { background: #27ae60; }
+
     #stufenwahl {
-      margin-top: 2em;
+      margin-top: 1.5rem;
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #strafenBox {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      padding: 1.5rem;
+      border-radius: 12px;
+      max-width: 500px;
+      min-height: 80px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>Bierpong Strafen</h1>
-  <h2>Wie möchtest du deine Strafe erhalten?</h2>
+  <h1>🍻 Bierpong Strafen</h1>
+  <h2>Wie willst du deine Strafe? 😈</h2>
 
-  <button class="btn zufall" onclick="zufallsStrafe()">Zufall</button>
-  <button class="btn selbst" onclick="zeigeStufen()">Selbst entscheiden</button>
+  <button class="btn zufall" onclick="zufallsStrafe()">🔀 Zufall</button>
+  <button class="btn selbst" onclick="zeigeStufen()">🧭 Selbst entscheiden</button>
 
-  <div id="stufenwahl" style="display:none;">
-    <h2>Wähle eine Schwierigkeitsstufe:</h2>
-    <button class="btn hot" onclick="zeigeStrafe('hot')">Hot</button>
-    <button class="btn ultimative" onclick="zeigeStrafe('ultimative')">Ultimative</button>
-    <button class="btn npc" onclick="zeigeStrafe('npc')">NPC</button>
-    <button class="btn tranquile" onclick="zeigeStrafe('tranquile')">Tranquile</button>
+  <div id="stufenwahl">
+    <button class="btn hot" onclick="zeigeStrafe('hot')">🔥 Hot</button>
+    <button class="btn ultimative" onclick="zeigeStrafe('ultimative')">💀 Ultimative</button>
+    <button class="btn npc" onclick="zeigeStrafe('npc')">🧠 NPC</button>
+    <button class="btn tranquile" onclick="zeigeStrafe('tranquile')">🍃 Tranquile</button>
   </div>
 
   <div id="strafenBox"></div>
@@ -65,24 +99,24 @@
   <script>
     const strafen = {
       hot: [
-        "Trinke 2 Schlucke mit geschlossenen Augen.",
-        "Du darfst erst wieder reden, wenn du etwas getrunken hast.",
-        "Stelle jemandem eine peinliche Frage."
+        "🔥 Trinke 2 Schlucke mit geschlossenen Augen.",
+        "🔥 Du darfst erst wieder reden, wenn du etwas getrunken hast.",
+        "🔥 Stelle jemandem eine peinliche Frage."
       ],
       ultimative: [
-        "Trinke dein ganzes Glas auf Ex.",
-        "Tausche dein Getränk mit dem schlimmsten am Tisch.",
-        "Spiele eine Runde mit nur einer Hand."
+        "💀 Trinke dein ganzes Glas auf Ex.",
+        "💀 Tausche dein Getränk mit dem schlimmsten am Tisch.",
+        "💀 Spiele eine Runde mit nur einer Hand."
       ],
       npc: [
-        "Sag 5 Minuten lang nichts außer 'Okay'.",
-        "Lächle die nächste Runde durchgehend.",
-        "Du darfst die nächste Runde nicht zielen."
+        "🧠 Sag 5 Minuten lang nichts außer 'Okay'.",
+        "🧠 Lächle die nächste Runde durchgehend.",
+        "🧠 Du darfst die nächste Runde nicht zielen."
       ],
       tranquile: [
-        "Trink einen Schluck und entspann dich.",
-        "Mach 10 Sekunden Augen zu – meditiere.",
-        "Lobe den nächsten Spieler."
+        "🍃 Trink einen Schluck und entspann dich.",
+        "🍃 Mach 10 Sekunden Augen zu – meditiere.",
+        "🍃 Lobe den nächsten Spieler."
       ]
     };
 
@@ -92,18 +126,24 @@
       const liste = strafen[zufallsStufe];
       const zufall = liste[Math.floor(Math.random() * liste.length)];
       document.getElementById("stufenwahl").style.display = "none";
-      document.getElementById("strafenBox").innerText = `(${zufallsStufe.toUpperCase()}): ${zufall}`;
+      zeigeStrafeText(`(${zufallsStufe.toUpperCase()}) ${zufall}`);
     }
 
     function zeigeStufen() {
-      document.getElementById("stufenwahl").style.display = "block";
-      document.getElementById("strafenBox").innerText = "";
+      document.getElementById("stufenwahl").style.display = "flex";
+      document.getElementById("strafenBox").style.display = "none";
     }
 
     function zeigeStrafe(stufe) {
       const liste = strafen[stufe];
       const zufall = liste[Math.floor(Math.random() * liste.length)];
-      document.getElementById("strafenBox").innerText = zufall;
+      zeigeStrafeText(zufall);
+    }
+
+    function zeigeStrafeText(text) {
+      const box = document.getElementById("strafenBox");
+      box.innerText = text;
+      box.style.display = "block";
     }
   </script>
 </body>
